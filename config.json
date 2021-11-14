@@ -1,0 +1,7 @@
+{
+  "versions": [
+    { "php": "7.3", "cli_version": "php7.3-3.0" },
+    { "php": "7.4", "cli_version": "php7.4-3.0" },
+    { "php": "8.0", "cli_version": "php8.0-3.0" }
+  ]
+}

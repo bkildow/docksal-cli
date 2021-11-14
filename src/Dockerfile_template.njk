@@ -1,4 +1,5 @@
-ARG CLI_VERSION=php7.4-3.0
+{#- cli_version comes from config.json #}
+ARG CLI_VERSION={{cli_version}}
 
 # Extend the Docksal CLI per https://docs.docksal.io/stack/extend-images/
 FROM docksal/cli:${CLI_VERSION}
