@@ -1,0 +1,26 @@
+{
+  "name": "cli",
+  "version": "1.0.0",
+  "description": "Generates dockerfiles",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-dockerfiles": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bkildow/docksal-cli.git"
+  },
+  "author": "",
+  "type": "module",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bkildow/docksal-cli/issues"
+  },
+  "homepage": "https://github.com/bkildow/docksal-cli#readme",
+  "dependencies": {
+    "fs-extra": "^10.0.0",
+    "nunjucks": "^3.2.3",
+    "rimraf": "^3.0.2"
+  }
+}
