@@ -5,13 +5,31 @@ on:
   push:
     branches:
       - main
-
 jobs:
-  docker:
-    runs-on: ubuntu-latest
+  build:
+    name: "Build: ${{ matrix.version }}"
+    runs-on: ubuntu-20.04
+
+    strategy:
+      fail-fast: false # Don't cancel other jobs if one fails
+      matrix:
+        include:
+          - version: '7.3'
+          - version: '7.4'
+          - version: '8.0'
+
+    env:
+      VERSION: ${{ matrix.version }}
+      
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Generate Dockerfiles
+        id: generate
+        run: |
+          npm install
+          npm run generate-dockerfiles
 
       - name: Prepare
         id: prep
@@ -58,7 +76,7 @@ jobs:
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: .
-          file: ./Dockerfile
+          file: ./build/${{ matrix.version }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.prep.outputs.tags }}
