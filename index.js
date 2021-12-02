@@ -101,6 +101,20 @@ async function createDockerfiles(template, versions) {
   )
 }
 
+/**
+ * Copies files from the src/shared dir to each of the build dirs.
+ *
+ * @param versions The version combination as context for the template, e.g. { php: "7.2", node: "10" }
+ */
+async function copyBuildFiles(versions) {
+  return Promise.all(
+    versions.map((version) => {
+      fse.copySync('src/shared', `${outputDirectory}/${version.php}`)
+      fse.copySync(`src/${version.php}`, `${outputDirectory}/${version.php}`)
+    })
+  )
+}
+
 async function bootstrap() {
   // Delete the output folder before building
   await rimraf(outputDirectory)
@@ -116,6 +130,9 @@ async function bootstrap() {
 
   // Create the Dockerfiles and get the corresponding information
   const files = await createDockerfiles(template, versions)
+
+  // Copies shared files into each build dir
+  await copyBuildFiles(versions)
 
   // Write the infromation to an output.json file
   await fs.writeFile(
