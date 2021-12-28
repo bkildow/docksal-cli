@@ -141,4 +141,4 @@ async function bootstrap() {
   )
 }
 
-bootstrap().then(() => console.log("Dockerfiles generated"))
+bootstrap().then(() => console.log("Dockerfiles generated to the build directory."))
